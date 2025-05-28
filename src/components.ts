@@ -39,4 +39,12 @@ export const AVAILABLE_COMPONENTS: Record<string, ComponentInfo> = {
     dependencies: ['@solana/web3.js', '@solana/wallet-adapter-react'],
     registryDependencies: ['badge'],
   },
+  'network-selector': {
+    // Add this new component
+    name: 'network-selector',
+    description: 'Solana network selector (Mainnet, Testnet, Devnet)',
+    files: ['network-selector.tsx', 'use-network.ts'],
+    dependencies: ['@solana/web3.js', '@solana/wallet-adapter-base'],
+    registryDependencies: ['select', 'badge'],
+  },
 }
