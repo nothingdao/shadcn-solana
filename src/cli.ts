@@ -3,7 +3,7 @@
 import { Command } from 'commander'
 import chalk from 'chalk'
 import ora from 'ora'
-import { execa } from 'execa'
+import execa = require('execa')
 import inquirer from 'inquirer'
 import { AVAILABLE_COMPONENTS } from './components.js'
 import { checkShadcnProject } from './utils.js'
