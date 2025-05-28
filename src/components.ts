@@ -32,19 +32,18 @@ export const AVAILABLE_COMPONENTS: Record<string, ComponentInfo> = {
       'badge',
     ],
   },
-  'wallet-balance': {
-    name: 'wallet-balance',
-    description: 'SOL balance display with real-time updates',
-    files: ['wallet-balance.tsx', 'use-solana-balance.ts'],
-    dependencies: ['@solana/web3.js', '@solana/wallet-adapter-react'],
-    registryDependencies: ['badge'],
-  },
   'network-selector': {
-    // Add this new component
     name: 'network-selector',
     description: 'Solana network selector (Mainnet, Testnet, Devnet)',
     files: ['network-selector.tsx', 'use-network.ts'],
     dependencies: ['@solana/web3.js', '@solana/wallet-adapter-base'],
     registryDependencies: ['select', 'badge'],
+  },
+  'setting-sheet': {
+    name: 'setting-sheet',
+    description: 'Settings sheet for wallet and network configuration',
+    files: ['setting-sheet.tsx'],
+    dependencies: ['@solana/web3.js', '@solana/wallet-adapter-base'],
+    registryDependencies: ['sheet', 'button', 'select'],
   },
 }
