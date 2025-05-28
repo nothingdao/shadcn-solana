@@ -79,18 +79,17 @@ async function addComponent(component?: string) {
   try {
     const componentUrl = `${REGISTRY_URL}/${componentToAdd}.json`
 
-    await execa(
-      'npx',
-      [
-        'shadcn@latest',
-        'add',
-        componentUrl,
-        '--force', // skip the React 19 prompt
-      ],
-      {
-        stdio: 'inherit', // Change from 'pipe' to 'inherit' to see output
-      }
-    )
+    const child = execa('npx', ['shadcn@latest', 'add', componentUrl], {
+      stdio: ['pipe', 'inherit', 'inherit'], // pipe stdin, inherit stdout/stderr
+    })
+
+    // Automatically select "Use --force" when prompted
+    setTimeout(() => {
+      child.stdin?.write('\n') // Press Enter to select the highlighted option
+      child.stdin?.end()
+    }, 1000) // Wait 1 second for the prompt to appear
+
+    await child
 
     spinner.succeed(chalk.green(`Added ${comp.name}`))
     console.log(chalk.gray('\nNext steps:'))
