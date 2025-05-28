@@ -79,9 +79,18 @@ async function addComponent(component?: string) {
   try {
     const componentUrl = `${REGISTRY_URL}/${componentToAdd}.json`
 
-    await execa('npx', ['shadcn@latest', 'add', componentUrl], {
-      stdio: 'pipe',
-    })
+    await execa(
+      'npx',
+      [
+        'shadcn@latest',
+        'add',
+        componentUrl,
+        '--force', // skip the React 19 prompt
+      ],
+      {
+        stdio: 'inherit', // Change from 'pipe' to 'inherit' to see output
+      }
+    )
 
     spinner.succeed(chalk.green(`Added ${comp.name}`))
     console.log(chalk.gray('\nNext steps:'))
