@@ -1,6 +1,6 @@
 {
   "name": "shadcn-solana",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Solana components built with shadcn/ui primitives",
   "main": "./dist/cli.js",
   "bin": {
