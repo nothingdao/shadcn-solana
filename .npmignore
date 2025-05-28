@@ -1,0 +1,10 @@
+// .npmignore
+src/
+tsconfig.json
+.gitignore
+*.log
+.DS_Store
+.env*
+.vscode/
+.idea/
+registry/templates/

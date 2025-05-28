@@ -1,0 +1,15 @@
+{
+  "name": "wallet-balance",
+  "dependencies": ["@solana/web3.js", "@solana/wallet-adapter-react"],
+  "registryDependencies": ["badge"],
+  "files": [
+    {
+      "path": "hooks/use-solana-balance.ts",
+      "content": "\"use client\";\n\nimport { useConnection, useWallet } from '@solana/wallet-adapter-react';\nimport { LAMPORTS_PER_SOL } from '@solana/web3.js';\nimport { useEffect, useState } from 'react';\n\nexport function useSolanaBalance() {\n  const { connection } = useConnection();\n  const { publicKey } = useWallet();\n  const [balance, setBalance] = useState<number | null>(null);\n  const [loading, setLoading] = useState(false);\n\n  useEffect(() => {\n    if (!publicKey || !connection) {\n      setBalance(null);\n      return;\n    }\n\n    const fetchBalance = async () => {\n      setLoading(true);\n      try {\n        const lamports = await connection.getBalance(publicKey);\n        setBalance(lamports / LAMPORTS_PER_SOL);\n      } catch (error) {\n        console.error('Failed to fetch balance:', error);\n        setBalance(null);\n      } finally {\n        setLoading(false);\n      }\n    };\n\n    fetchBalance();\n    \n    const subscription = connection.onAccountChange(\n      publicKey,\n      () => fetchBalance(),\n      'confirmed'\n    );\n\n    return () => {\n      connection.removeAccountChangeListener(subscription);\n    };\n  }, [publicKey, connection]);\n\n  return { balance, loading };\n}"
+    },
+    {
+      "path": "components/solana/wallet-balance.tsx",
+      "content": "\"use client\";\n\nimport React from 'react';\nimport { Badge } from '@/components/ui/badge';\nimport { useSolanaBalance } from '@/hooks/use-solana-balance';\nimport { Loader2 } from 'lucide-react';\n\ninterface WalletBalanceProps {\n  className?: string;\n}\n\nexport function WalletBalance({ className }: WalletBalanceProps) {\n  const { balance, loading } = useSolanaBalance();\n\n  if (balance === null && !loading) {\n    return null;\n  }\n\n  return (\n    <Badge variant=\"secondary\" className={className}>\n      {loading ? (\n        <>\n          <Loader2 className=\"w-3 h-3 mr-1 animate-spin\" />\n          Loading...\n        </>\n      ) : (\n        `${balance?.toFixed(4)} SOL`\n      )}\n    </Badge>\n  );\n}"
+    }
+  ]
+}

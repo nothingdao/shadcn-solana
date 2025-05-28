@@ -1,0 +1,50 @@
+{
+  "name": "shadcn-solana",
+  "version": "1.0.0",
+  "description": "Solana components built with shadcn/ui primitives",
+  "main": "./dist/cli.js",
+  "bin": {
+    "shadcn-solana": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"No tests yet\"",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "solana",
+    "shadcn",
+    "ui",
+    "react",
+    "nextjs",
+    "web3",
+    "wallet"
+  ],
+  "author": "Your Name <your@email.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nothingdao/shadcn-solana.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nothingdao/shadcn-solana/issues"
+  },
+  "homepage": "https://github.com/nothingdao/shadcn-solana#readme",
+  "dependencies": {
+    "commander": "^11.0.0",
+    "chalk": "^5.3.0",
+    "ora": "^7.0.1",
+    "execa": "^8.0.1",
+    "inquirer": "^9.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/inquirer": "^9.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
