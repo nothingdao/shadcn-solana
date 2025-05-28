@@ -39,11 +39,20 @@ export const AVAILABLE_COMPONENTS: Record<string, ComponentInfo> = {
     dependencies: ['@solana/web3.js', '@solana/wallet-adapter-base'],
     registryDependencies: ['select', 'badge'],
   },
-  'setting-sheet': {
-    name: 'setting-sheet',
-    description: 'Settings sheet for wallet and network configuration',
-    files: ['setting-sheet.tsx'],
-    dependencies: ['@solana/web3.js', '@solana/wallet-adapter-base'],
-    registryDependencies: ['sheet', 'button', 'select'],
+  'settings-sheet': {
+    name: 'settings-sheet',
+    description:
+      'Solana settings panel for RPC, API keys, and connection preferences',
+    files: ['settings-sheet.tsx', 'use-solana-settings.ts'],
+    dependencies: ['@solana/web3.js'],
+    registryDependencies: [
+      'sheet',
+      'button',
+      'input',
+      'label',
+      'separator',
+      'badge',
+      'switch',
+    ],
   },
 }
